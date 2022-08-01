@@ -4,7 +4,7 @@
             <div class="card-header">Login</div>
             <div class="card-body">
                 <div class="alert alert-danger" v-if="has_error">
-                    <p>Error, Invalid credentials.</p>
+                    <span>Error, Invalid credentials.</span>
                 </div>
                 <form autocomplete="off" @submit.prevent="login" method="post">
                     <div class="form-group">
@@ -38,16 +38,13 @@ export default {
     },
     mounted() {
       //
+      console.log(this.$auth);
     },
     methods: {
         async login() {
-            // get the redirect object
             var redirect = this.$auth.redirect()
-
-            var app = this
-
             var params = {
-                data: { email: app.email, password: app.password },
+                data: { email: this.email, password: this.password },
                 rememberMe: true,
                 fetchUser: true
             }
@@ -55,7 +52,7 @@ export default {
             try {
                 const response = await this.$auth.login(params);
             } catch (err) {
-                app.has_error = true
+                this.has_error = true
             }
             
         }

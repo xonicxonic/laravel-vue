@@ -26,15 +26,14 @@ Route::prefix('auth')->group(function () {
 
     Route::group(['middleware' => 'auth:api'], function(){
         Route::post('logout', 'AuthController@logout');
-        Route::get('user', 'AuthController@user');
     });
-
 });
 
 Route::group(['middleware' => 'auth:api'], function(){
     	
-    Route::apiResource('users', 'UserController');
-
+    Route::post('/todo/create', 'ToDoController@store');
+    Route::put('/todo/update/{id}', 'ToDoController@update');
+    Route::delete('/todo/delete/{id}', 'ToDoController@delete');
+    Route::get('/todo', 'ToDoController@index');
 });
-//filter and pagination
-Route::get('/user/pagnination', 'UserController@pagnination');
+

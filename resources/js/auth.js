@@ -16,4 +16,5 @@ const config = {
   fetchData: {url: 'auth/user', method: 'GET', enabled: true},
   refreshData: {url: 'auth/refresh', method: 'GET', enabled: true, interval: 30}
 }
+
 export default config

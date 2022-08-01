@@ -34,6 +34,9 @@
         "vform": "^1.0.1",
         "vue-axios": "^2.1.5",
         "vue-progressbar": "^0.7.5",
-        "vue-router": "^3.4.5"
+        "vue-router": "^3.4.5",
+        "vue-toastification": "^1.7.14",
+        "vuelidate": "^0.7.7",
+        "vuex": "^3.4.0"
     }
 }

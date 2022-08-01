@@ -12,6 +12,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
+    public function reRoute(){
+        return view('main');
+    }
 
     public function login(Request $request) {
 
@@ -41,8 +44,9 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
         ]);
 
         if($validator->fails()){
@@ -55,15 +59,13 @@ class AuthController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'username' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'ip_address' => $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0'
         ]);
 
         return response()->json(['status' => 'success'], 200);
-
-        //$token = JWTAuth::fromUser($user);
-        //return response()->json(compact('user','token'),201);
     }
 
     public function user(Request $request)
@@ -114,6 +116,4 @@ class AuthController extends Controller
 
         return response()->json(compact('user'));
     }
-
-
 }

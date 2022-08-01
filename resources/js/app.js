@@ -42,7 +42,7 @@ Vue.use(VueProgressBar, progressoptions)
 
 // Set Vue authentication
 Vue.use(VueAxios, axios)
-axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`
+axios.defaults.baseURL = `/api`
 Vue.use(VueAuth, auth)
 
 // Install BootstrapVue
@@ -55,6 +55,17 @@ Vue.use(IconsPlugin)
 Vue.component('index', Index)
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
+
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
+const options = {
+    // You can set your default options here
+};
+
+Vue.use(Toast, options);
+
+import store from './store';
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -76,6 +87,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
-  	router
-
+  	router,
+    store
 });
